@@ -1,0 +1,50 @@
+﻿<ABCRetailer.Models.Customer>
+@model List<Customer>
+
+    @{
+        ViewData ["Title"] = "Customers";
+    }
+
+<h2>Customers</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody> 
+    @foreach (var customer in Model)
+    {
+        <tr>
+            <td>@customer.customerName</td>
+            <td>@customer.customerSurname</td>
+            <td>@customer.customerEmail</td>
+           
+        </tr>
+    }
+    </tbody>
+</table>
+<h3>Add New Customer</h3>
+
+<form asp-action="AddCustomer" method="post">
+    <div class="row mb-2">
+        <div class="col">
+            <label for="Name">Name</label>
+            <input class="form-control" id="Name" name="Name" required />
+        </div>
+        <div class="col">
+            <label for="Surname">Surname</label>
+            <input class="form-control" id="Surname" name="Surname" required />
+        </div>
+        <div class="col">
+            <label for="Email">Email</label>
+            <input class="form-control" id="Email" name="Email" type="email" required />
+        </div>
+        <div class="col-auto d-flex align-items-end">
+            <button class="btn btn-warning" type="submit">Add Customer</button>
+        </div>
+    </div>
+
+</form>

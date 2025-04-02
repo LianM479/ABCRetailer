@@ -1,0 +1,79 @@
+﻿@model List<ABCRetailer.Models.Product>
+
+@{
+    ViewBag.Title = "Books Collection";
+    //var products = ViewBag.Products as List<ABCRetailer.Models.Product> ?? new List<ABCRetailer.Models.Product>();
+}
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product Title</th>
+                <th>Product Author</th>
+                <th>Product Description</th>
+                <th>Product Price</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.productTitle</td>
+                    <td>@product.productAuthor</td>
+                    <td>@product.productDescription</td>
+                    <td>@product.productPrice</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(product.ImageUrl))
+                        {
+                            <img src="@product.ImageUrl" alt="Product Image" width="100" height="100" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No products available.</p>
+}
+
+
+<h2>Add Product</h2>
+
+<form asp-controller= "Product" asp-action="AddProduct" method="post" enctype="multipart/form-data">
+    <label>Product Title:</label>
+    <input type="text" name="productTitle" required />
+
+    <label>Product Author:</label>
+    <input type="text" name="productAuthor" required />
+
+    <label>Description:</label>
+    <input type="text" name="productDescription" required />
+
+    <label>Price:</label>
+    <input type="number" name="productPrice" required />
+    <br />
+    <br />
+    <br />
+    <label>Upload Image:</label>
+    <input type="file" name="imageFile" class="btn btn-warning accept="image/*" />
+   
+    <div class="text-center mt-5">
+    <button type="submit" class="btn btn-warning">Submit</button>
+    </div>
+</form>
+
+<div class="text-center mt-4">
+    <a class="btn btn-warning" asp-controller="Customer" asp-action="Index">
+        View or Add Customer
+    </a>
+</div>
+
+<div class="text-center mt-4">
+    <a class="btn btn-warning" asp-controller="Order" asp-action="Create">
+        Place an Order
+    </a>
+</div>

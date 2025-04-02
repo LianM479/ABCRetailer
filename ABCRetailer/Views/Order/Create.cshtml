@@ -1,0 +1,26 @@
+﻿@model ABCRetailer.Models.Order
+
+@{
+    ViewData["Title"] = "Process Order";
+}
+
+<h2>Place an Order</h2>
+
+@if (TempData["SucessMessage"] != null)
+{
+    <p style="color: green;">@TempData["SuccessMessage"]</p>
+}
+
+<form method="post" asp-controller="Order" asp-action="Create">
+    <label>Customer Name:</label>
+    <input type="text" name="CustomerName" required />
+
+    <label>Products (comma-separated):</label>
+    <input type="text" name="Product" required />
+
+    <label>Total Price:</label>
+    <input type="text" name="TotalPrice" required />
+
+
+    <button type="submit">Place Order</button>
+</form>
